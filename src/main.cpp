@@ -60,10 +60,10 @@ int main() {
         // img2.save_as_png("output_sepia.png");
 
         // Add two images
-        std::cout << "Adding two images..." << std::endl;
-        std::unique_ptr<unsigned char[]> add_result(new unsigned char[img1.width * img1.height * img1.channels]);
-        img1.add_images(img1.data, img2.data, add_result.get(), img1.width, img1.height, img1.channels, img2.width, img2.height, img2.channels);
-        save_image_with_data(img1, add_result.get(), "/Users/cynthiaabi/Desktop/WorkSpace/ImageProcessing2/output/output_add.png");
+        // std::cout << "Adding two images..." << std::endl;
+        // std::unique_ptr<unsigned char[]> add_result(new unsigned char[img1.width * img1.height * img1.channels]);
+        // img1.add_images(img1.data, img2.data, add_result.get(), img1.width, img1.height, img1.channels, img2.width, img2.height, img2.channels);
+        // save_image_with_data(img1, add_result.get(), "/Users/cynthiaabi/Desktop/WorkSpace/ImageProcessing2/output/output_add.png");
 
         // Subtract two images
         // std::cout << "Subtracting two images..." << std::endl;
@@ -98,7 +98,17 @@ int main() {
         // img1.high_pass_filter(img1.data, hp_result.get(), img1.width, img1.height, img1.channels, 0); // Prewitt filter
         // save_image_with_data(img1, hp_result.get(), "/Users/cynthiaabi/Desktop/WorkSpace/ImageProcessing2/output/output_highpass.png");
 
-
+        // Resizing the image
+        std::cout << "Resizing the image..." << std::endl;
+        int new_width = img1.width / 2;
+        int new_height = img1.height / 2;
+        unsigned char* resize_result = new unsigned char[new_width * new_height * img1.channels];
+        img1.resize_image(img1.data, resize_result, img1.width, img1.height, new_width, new_height, img1.channels);
+        Image resized_image("/Users/cynthiaabi/Desktop/WorkSpace/ImageProcessing2/images/test_image1.png");
+        resized_image.data = resize_result;
+        resized_image.width = new_width;
+        resized_image.height = new_height;
+        resized_image.save_as_png("/Users/cynthiaabi/Desktop/WorkSpace/ImageProcessing2/output/output_resized.png");
 
         // // Otsu's thresholding
         // std::cout << "Applying Otsu's thresholding..." << std::endl;
